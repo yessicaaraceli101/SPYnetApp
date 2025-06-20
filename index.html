@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel Principal - Spynet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    /* Ocultar secciones por defecto */
+    #formAsistencia { display: none; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Spynet</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="linkRegistrar">Registrar Asistencia</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#">Lista de Asistencias</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Asistencias</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Configuración</a></li>
+        </ul>
+        <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-white" href="/logout" id="logoutLink">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Página principal -->
+  <div id="paginaPrincipal" class="container mt-5">
+    <h1 class="text-center">¡Bienvenido/a a Spynet!</h1>
+    <p class="text-center">Selecciona una opción del menú para comenzar.</p>
+  </div>
+
+  <!-- Formulario Registrar Asistencia -->
+  <div id="formAsistencia" class="container mt-4">
+    <h2>Registrar Nueva Asistencia</h2>
+    <form method="POST" id="formularioAsistencia">
+      <div class="mb-3">
+        <label class="form-label">Cliente</label>
+        <input name="cliente" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Dirección</label>
+        <input name="direccion" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Tipo</label>
+        <select name="tipo" class="form-select">
+          <option>Seleccionar</option>
+          <option>Instalación</option>
+          <option>Reparación</option>
+          <option>Cambio de router</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Señal</label>
+        <select name="prioridad" class="form-select">
+          <option>Seleccionar</option>
+          <option>Alta</option>
+          <option>Media</option>
+          <option>Baja</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <textarea name="problema" class="form-control" rows="4"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Técnico asignado</label>
+        <select name="tecnico" class="form-select">
+          <option>Seleccionar</option>
+          <option>Cristhian Alcaraz</option>
+          <option>Richard Leckie</option>
+          <option>Robert Leckie</option>
+          <option>Néstor Villalba</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <button class="btn btn-secondary" type="button" id="btnCancelar">Volver al menú</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Mostrar formulario y ocultar página principal
+    const linkRegistrar = document.getElementById('linkRegistrar');
+    const paginaPrincipal = document.getElementById('paginaPrincipal');
+    const formAsistencia = document.getElementById('formAsistencia');
+    const btnCancelar = document.getElementById('btnCancelar');
+
+    linkRegistrar.addEventListener('click', function(event) {
+      event.preventDefault();
+      paginaPrincipal.style.display = 'none';
+      formAsistencia.style.display = 'block';
+    });
+
+    btnCancelar.addEventListener('click', function() {
+      formAsistencia.style.display = 'none';
+      paginaPrincipal.style.display = 'block';
+    });
+
+    // Aquí podrías agregar el código para enviar el formulario con AJAX o lo que necesites
+  </script>
+  <script>
+  const logoutLink = document.getElementById('logoutLink');
+  logoutLink.addEventListener('click', function(event) {
+    if (!confirm('¿Estás seguro/a de que quieres cerrar sesión?')) {
+      event.preventDefault(); // Cancela la acción si el usuario no confirma
+    }
+  });
+</script>
+</body>
+</html>
