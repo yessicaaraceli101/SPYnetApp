@@ -139,5 +139,26 @@
     }
   });
 </script>
+<script>
+  // Tu código JavaScript para manejar el login aquí
+  const formLogin = document.getElementById('formLogin');
+  const loginSeccion = document.getElementById('loginSeccion');
+  const appSeccion = document.getElementById('paginaPrincipal'); // tu sección principal
+
+  formLogin.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const usuario = formLogin.usuario.value.trim();
+    const contraseña = formLogin.contraseña.value.trim();
+
+    if (usuario === 'admin' && contraseña === '1234') {
+      alert('Login exitoso');
+      loginSeccion.style.display = 'none';
+      appSeccion.style.display = 'block';
+    } else {
+      alert('Usuario o contraseña incorrectos');
+    }
+  });
+</script>
 </body>
 </html>
