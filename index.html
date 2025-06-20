@@ -2,126 +2,140 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Panel Principal - Spynet</title>
+  <title>Spynet App</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    /* Ocultar secciones por defecto */
-    #formAsistencia { display: none; }
+    body, html {
+      height: 100%;
+      background-color: #f8f9fa;
+    }
+    .login-container, #paginaPrincipal, #formAsistencia {
+      display: none;
+    }
+    .logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Spynet</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" id="linkRegistrar">Registrar Asistencia</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">Lista de Asistencias</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Asistencias</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Configuración</a></li>
-        </ul>
-        <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link text-white" href="/logout" id="logoutLink">Cerrar sesión</a></li>
-        </ul>
-      </div>
+
+<!-- Login -->
+<div class="container d-flex justify-content-center align-items-center login-container" style="height: 100vh;" id="loginSeccion">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <div class="text-center">
+      <img src="static/img/logo.png" alt="Spynet Logo" class="logo">
+      <h2 class="mb-4">Iniciar sesión</h2>
     </div>
-  </nav>
-
-  <!-- Página principal -->
-  <div id="paginaPrincipal" class="container mt-5">
-    <h1 class="text-center">¡Bienvenido/a a Spynet!</h1>
-    <p class="text-center">Selecciona una opción del menú para comenzar.</p>
-  </div>
-
-  <!-- Formulario Registrar Asistencia -->
-  <div id="formAsistencia" class="container mt-4">
-    <h2>Registrar Nueva Asistencia</h2>
-    <form method="POST" id="formularioAsistencia">
+    <form id="formLogin">
       <div class="mb-3">
-        <label class="form-label">Cliente</label>
-        <input name="cliente" class="form-control" required />
+        <label class="form-label">Usuario</label>
+        <input name="usuario" class="form-control" required />
       </div>
       <div class="mb-3">
-        <label class="form-label">Dirección</label>
-        <input name="direccion" class="form-control" required />
+        <label class="form-label">Contraseña</label>
+        <input type="password" name="contraseña" class="form-control" required />
       </div>
-      <div class="mb-3">
-        <label class="form-label">Tipo</label>
-        <select name="tipo" class="form-select">
-          <option>Seleccionar</option>
-          <option>Instalación</option>
-          <option>Reparación</option>
-          <option>Cambio de router</option>
-          <option>Otro</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Señal</label>
-        <select name="prioridad" class="form-select">
-          <option>Seleccionar</option>
-          <option>Alta</option>
-          <option>Media</option>
-          <option>Baja</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Descripción</label>
-        <textarea name="problema" class="form-control" rows="4"></textarea>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Técnico asignado</label>
-        <select name="tecnico" class="form-select">
-          <option>Seleccionar</option>
-          <option>Cristhian Alcaraz</option>
-          <option>Richard Leckie</option>
-          <option>Robert Leckie</option>
-          <option>Néstor Villalba</option>
-        </select>
-      </div>
-      <button class="btn btn-primary" type="submit">Guardar</button>
-      <button class="btn btn-secondary" type="button" id="btnCancelar">Volver al menú</button>
+      <button class="btn btn-primary w-100" type="submit">Entrar</button>
     </form>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Mostrar formulario y ocultar página principal
-    const linkRegistrar = document.getElementById('linkRegistrar');
-    const paginaPrincipal = document.getElementById('paginaPrincipal');
-    const formAsistencia = document.getElementById('formAsistencia');
-    const btnCancelar = document.getElementById('btnCancelar');
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="navbarMenu" style="display: none;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Spynet</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="#" id="linkRegistrar">Registrar Asistencia</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Lista de Asistencias</a></li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-white" href="#" id="logoutLink">Cerrar sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-    linkRegistrar.addEventListener('click', function(event) {
+<!-- Página principal -->
+<div id="paginaPrincipal" class="container mt-5">
+  <h1 class="text-center">¡Bienvenido/a a Spynet!</h1>
+  <p class="text-center">Selecciona una opción del menú para comenzar.</p>
+</div>
+
+<!-- Formulario Asistencia -->
+<div id="formAsistencia" class="container mt-4">
+  <h2>Registrar Nueva Asistencia</h2>
+  <form id="formularioAsistencia">
+    <div class="mb-3"><label class="form-label">Cliente</label><input name="cliente" class="form-control" required /></div>
+    <div class="mb-3"><label class="form-label">Dirección</label><input name="direccion" class="form-control" required /></div>
+    <div class="mb-3"><label class="form-label">Tipo</label>
+      <select name="tipo" class="form-select">
+        <option>Seleccionar</option><option>Instalación</option><option>Reparación</option><option>Cambio de router</option><option>Otro</option>
+      </select>
+    </div>
+    <div class="mb-3"><label class="form-label">Señal</label>
+      <select name="prioridad" class="form-select">
+        <option>Seleccionar</option><option>Alta</option><option>Media</option><option>Baja</option>
+      </select>
+    </div>
+    <div class="mb-3"><label class="form-label">Descripción</label>
+      <textarea name="problema" class="form-control" rows="4"></textarea>
+    </div>
+    <div class="mb-3"><label class="form-label">Técnico asignado</label>
+      <select name="tecnico" class="form-select">
+        <option>Seleccionar</option>
+        <option>Cristhian Alcaraz</option>
+        <option>Richard Leckie</option>
+        <option>Robert Leckie</option>
+        <option>Néstor Villalba</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Guardar</button>
+    <button class="btn btn-secondary" type="button" id="btnCancelar">Volver al menú</button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Mostrar login al cargar
+  window.onload = () => {
+    document.getElementById('loginSeccion').style.display = 'flex';
+  };
+
+  // Simulación de login
+  document.getElementById('formLogin').addEventListener('submit', function(event) {
+    event.preventDefault();
+    document.getElementById('loginSeccion').style.display = 'none';
+    document.getElementById('navbarMenu').style.display = 'block';
+    document.getElementById('paginaPrincipal').style.display = 'block';
+  });
+
+  // Navegación entre secciones
+  document.getElementById('linkRegistrar').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('paginaPrincipal').style.display = 'none';
+    document.getElementById('formAsistencia').style.display = 'block';
+  });
+
+  document.getElementById('btnCancelar').addEventListener('click', function() {
+    document.getElementById('formAsistencia').style.display = 'none';
+    document.getElementById('paginaPrincipal').style.display = 'block';
+  });
+
+  // Confirmación al cerrar sesión
+  document.getElementById('logoutLink').addEventListener('click', function(event) {
+    if (!confirm('¿Estás segura/o de que deseas cerrar sesión?')) {
       event.preventDefault();
-      paginaPrincipal.style.display = 'none';
-      formAsistencia.style.display = 'block';
-    });
-
-    btnCancelar.addEventListener('click', function() {
-      formAsistencia.style.display = 'none';
-      paginaPrincipal.style.display = 'block';
-    });
-
-    // Aquí podrías agregar el código para enviar el formulario con AJAX o lo que necesites
-  </script>
-  <script>
-  const logoutLink = document.getElementById('logoutLink');
-  logoutLink.addEventListener('click', function(event) {
-    if (!confirm('¿Estás seguro/a de que quieres cerrar sesión?')) {
-      event.preventDefault(); // Cancela la acción si el usuario no confirma
+    } else {
+      // Simula cierre de sesión volviendo al login
+      document.getElementById('navbarMenu').style.display = 'none';
+      document.getElementById('paginaPrincipal').style.display = 'none';
+      document.getElementById('formAsistencia').style.display = 'none';
+      document.getElementById('loginSeccion').style.display = 'flex';
     }
   });
 </script>
